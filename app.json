@@ -1,0 +1,12 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/web/web"
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#ffffff",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "拉瓦云",
+        "backgroundTextStyle": "light"
+    }
+}
