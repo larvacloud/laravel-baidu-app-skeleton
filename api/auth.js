@@ -1,15 +1,17 @@
 import request from './request'
 import config from '../config'
 
-export function login(data) {
+export function login(code, user_info) {
     return request({
         method: 'POST',
         url: '/oauth/token',
         data: {
-            grant_type: 'social',
+            grant_type: 'mini-program',
             client_id: config.appId,
             client_secret: config.appSecret,
-
+			provider: "baidu",
+            code: code,
+            user_info: user_info
         }
     })
 }
