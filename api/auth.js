@@ -9,7 +9,7 @@ export function login(code, user_info) {
             grant_type: 'mini-program',
             client_id: config.appId,
             client_secret: config.appSecret,
-			provider: "baidu",
+			provider: "baidu_smart_program",
             code: code,
             user_info: user_info
         }
