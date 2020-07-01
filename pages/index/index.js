@@ -3,10 +3,13 @@
  * @author swan
  */
 const app = getApp()
+const api = require('../../api/index')
 
 Page({
     data: {
-
+        userInfo: {},
+        hasUserInfo: false,
+        canIUse: swan.canIUse('button.open-type.getUserInfo')
     },
     onLoad(options) {
         console.log('生命周期函数--监听页面加载' + JSON.stringify(options))
@@ -31,5 +34,36 @@ Page({
     },
     onShareAppMessage: function () {
         // 用户点击右上角转发
+    },
+    getUserInfo(e) {
+        swan.login({
+            success: (data) => {
+                swan.getUserInfo({
+                    success: (res) => {
+                        api.auth.login(data.code,res.userInfo).then(res => {
+                            console.log(res)
+                        }).catch(err => {
+                            console.log(err)
+                        });
+                        this.setData({
+                            userInfo: res.userInfo,
+                            hasUserInfo: true
+                        });
+                    },
+                    fail: () => {
+                        this.setData({
+                            userInfo: e.detail.userInfo,
+                            hasUserInfo: true
+                        });
+                    }
+                });
+            },
+            fail: () => {
+                swan.showModal({
+                    title: '未登录',
+                    showCancel: false
+                });
+            }
+        });
     }
 })
