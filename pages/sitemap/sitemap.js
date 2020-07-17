@@ -7,8 +7,13 @@ Page({
         currentPage: 1,//当前页数
         path: 'pages/sitemap/sitemap'//路径
     },
-    onLoad: function () {
-        // 监听页面加载的生命周期函数
+    onLoad: function (e) {
+        // 初始页面打开时，需要读取页面的 currentPage 参数（即翻页页码），并根据参数值请求数据
+        let {currentPage} = e;
+        // 起始页码为 1，如读取到的值为空，默认赋值起始页码
+        currentPage = +currentPage || 1;
+        // 根据当前页码获取该页数据资源
+        this.requestData(currentPage);
     },
     onReady: function() {
         // 监听页面初次渲染完成的生命周期函数
